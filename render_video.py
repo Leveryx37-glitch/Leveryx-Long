@@ -8,18 +8,18 @@ import shutil
 scenes_data = json.loads(os.environ.get('SCENES_DATA', '[]'))
 title = os.environ.get('TITLE', 'Universal Video')
 description = os.environ.get('DESCRIPTION', 'Amazing facts.')
-thumbnail_prompt = os.environ.get('THUMBNAIL_PROMPT', 'Cinematic thumbnail')
+thumbnail_prompt = os.environ.get('THUMBNAIL_PROMPT', 'Manual Thumbnail')
 pexels_key = os.environ.get('PEXELS_API_KEY')
 chat_id = os.environ.get('CHAT_ID')
 telegram_token = os.environ.get('TELEGRAM_BOT_TOKEN')
 
 # 👇 USA Channel Name Updated for New Channel 👇
-channel_name = "Digital Mind®" 
+channel_name = "Leveryx" 
 
 print(f"DEBUG: Processing {len(scenes_data)} scenes async...")
 
-# --- SMART DYNAMIC FALLBACK KEYWORDS (Updated for Tech/Dystopia Niche) ---
-fallback_env = os.environ.get('FALLBACK_KEYWORDS', 'scrolling phone in dark, abstract digital data, glowing screen reflection, server room lights, cyber security, typing in dark')
+# --- SMART DYNAMIC FALLBACK KEYWORDS (Updated for Corporate/Wealth Niche) ---
+fallback_env = os.environ.get('FALLBACK_KEYWORDS', 'dark boardroom, chess board, ticking pocket watch, shaking hands in shadow, empty leather chair, skyscraper night')
 FALLBACK_KEYWORDS = [kw.strip() for kw in fallback_env.split(',')]
 
 TEMP_DIR = "/dev/shm" if os.path.exists("/dev/shm") else os.getcwd()
@@ -56,7 +56,7 @@ async def get_audio_duration(file_path):
         return 5.0 
 
 async def process_scene(session, i, scene):
-    keyword = scene.get('keyword', 'abstract digital data')
+    keyword = scene.get('keyword', 'dark boardroom')
     text_line = scene.get('text', '').strip()
     if not text_line: return None
     
@@ -210,8 +210,8 @@ async def main_pipeline():
         run_id = os.environ.get('GITHUB_RUN_ID', str(int(time.time())))
         tag_name = f"vid-{run_id}"
         
-        # 👇 Repo name updated as per screenshots 👇
-        repo_name = os.environ.get('GITHUB_REPOSITORY', "DigitalMind2030-byte/Digital-Mind-Long") 
+        # 👇 Repo name updated for Leveryx 👇
+        repo_name = os.environ.get('GITHUB_REPOSITORY', "Leveryx37-glitch/Leveryx-Long") 
         
         try:
             cmd = ['gh', 'release', 'create', tag_name, final_video, '--repo', repo_name, '--notes', 'Automated Video Render']
@@ -236,7 +236,7 @@ async def main_pipeline():
         # ==========================================
         if telegram_token:
             if video_link:
-                payload = {"chat_id": chat_id, "text": f"READY_TO_UPLOAD|{video_link}|{title.replace('|', '')}|{thumbnail_prompt.replace('|', '')}|{description.replace('|', '')}"}
+                payload = {"chat_id": chat_id, "text": f"READY_TO_UPLOAD|{video_link}|{title.replace('|', '')}||{description.replace('|', '')}"}
             else:
                 payload = {"chat_id": chat_id, "text": f"⚠️ ERROR: Upload fail hua. GitHub release banne mein problem aayi."}
             

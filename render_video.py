@@ -14,7 +14,7 @@ chat_id = os.environ.get('CHAT_ID')
 telegram_token = os.environ.get('TELEGRAM_BOT_TOKEN')
 
 # 👇 USA Channel Name Updated for New Channel 👇
-channel_name = "Leveryx" 
+channel_name = "Lyx®" 
 
 print(f"DEBUG: Processing {len(scenes_data)} scenes async...")
 
@@ -115,6 +115,7 @@ async def process_scene(session, i, scene):
         pop_path = os.path.abspath("pop.mp3")
         has_pop = os.path.exists(pop_path)
 
+        # 👇 Changes verified here: y=40 is set for Top-Right positioning 👇
         if is_valid_video:
             cmd = ['ffmpeg', '-y', '-ignore_editlist', '1', '-stream_loop', '-1', '-fflags', '+genpts', '-i', vid_path, '-ss', '0.2', '-i', raw_mp3]
             if has_pop: cmd += ['-i', pop_path]
